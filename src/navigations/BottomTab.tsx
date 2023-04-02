@@ -4,20 +4,17 @@ import ExpensesStack from "./ExpensesStack";
 import theme from "../theme";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
 const BottomTab = () => {
   return (
     <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarActiveTintColor: theme.Colors.white,
-        tabBarInactiveTintColor: theme.Colors.inactive,
-        tabBarStyle: { backgroundColor: theme.Colors.lightPrimary },
-      }}
+      activeColor={theme.Colors.white}
+      inactiveColor={theme.Colors.inactive}
+      barStyle={{ backgroundColor: theme.Colors.lightPrimary }}
     >
       <Tab.Screen
-        options={{ title: "Recent Expenses", headerShown: false }}
+        options={{ title: "Recent Expenses" }}
         name="ExpensesStack"
         component={ExpensesStack}
       />
