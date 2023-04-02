@@ -1,9 +1,10 @@
 import { ColorsI } from "../../types/colors";
 
 export const colors: ColorsI = {
-  primary: "#351401",
+  primary: "##014E46",
   secondary: "#D4AC0D",
   lightSecondary: "#e2b497",
+  lightPrimary: "#519E96",
   darkSecondary: "#8a710cd9",
   text: "#383838",
   subtitle: "#7C7C7C",

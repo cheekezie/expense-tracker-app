@@ -1,31 +1,32 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import RecentExpensesScreen from "../screens/RecentExpensesScreen";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import AllExpensesScreen from "../screens/AllExpensesScreen";
-import AddExpense from "../screens/AddExpense";
-import EditExpense from "../screens/EditExpense";
-import HeaderIconButton from "../components/HeaderIconButton";
+import ExpensesStack from "./ExpensesStack";
+import theme from "../theme";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
 const BottomTab = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="RecentExpensesScreen"
-        component={RecentExpensesScreen}
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: theme.Colors.white,
+        tabBarInactiveTintColor: theme.Colors.inactive,
+        tabBarStyle: { backgroundColor: theme.Colors.lightPrimary },
+      }}
+    >
+      <Tab.Screen
+        options={{ title: "Recent Expenses", headerShown: false }}
+        name="ExpensesStack"
+        component={ExpensesStack}
       />
-      <Stack.Screen name="AllExpensesScreen" component={AllExpensesScreen} />
-      <Stack.Group
-        screenOptions={{
-          presentation: "modal",
-          headerLeft: ({ tintColor }) => (
-            <HeaderIconButton icon={"close"} color={tintColor as string} />
-          ),
-        }}
-      >
-        <Stack.Screen name="AddExpense" component={AddExpense} />
-        <Stack.Screen name="AllExpensesScreen" component={EditExpense} />
-      </Stack.Group>
-    </Stack.Navigator>
+      <Tab.Screen
+        options={{ title: "All Expenses" }}
+        name="AllExpensesScreen"
+        component={AllExpensesScreen}
+      />
+    </Tab.Navigator>
   );
 };
 
