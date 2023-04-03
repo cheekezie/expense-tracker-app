@@ -1,21 +1,15 @@
 import { useLayoutEffect } from "react";
-import { ManageExpenseNavPropsI } from "../types/navigation";
+import { StyleSheet, View } from "react-native";
 import HeaderIconButton from "../components/HeaderIconButton";
-import { StyleSheet } from "react-native";
-import { View } from "react-native";
 import Button from "../components/UI/Button";
+import { useAppDispatch } from "../store/hooks/hooks";
+import { addExpense, editExpense, removeExpense } from "../store/redux/expense";
 import { ExpensesI } from "../types/expenses";
-import { useAppDispatch, useAppSelector } from "../store/hooks/hooks";
-import {
-  addExpense,
-  editExpense,
-  removeExpense,
-  selectExpenses,
-} from "../store/redux/expense";
+import { ManageExpenseNavPropsI } from "../types/navigation";
 
 const ManageExpenseScreen = ({ navigation, route }: ManageExpenseNavPropsI) => {
   const editMode = !!route.params?.data;
-  const expenseToEdit = route.params.data;
+  const expenseToEdit = route.params?.data;
 
   const dispatch = useAppDispatch();
   const closeaAvigation = () => {

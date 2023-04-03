@@ -1,10 +1,13 @@
+import { useContext } from "react";
 import ExpensesOutput from "../components/ExpenseList/ExpensesOutput";
 import { useAppSelector } from "../store/hooks/hooks";
 
 import { selectExpenses } from "../store/redux/expense";
+import { ExpeenseContext } from "../store/context/expense-context";
 
 const RecentExpensesScreen = () => {
   const expenses = useAppSelector(selectExpenses);
+  const expensesCtx = useContext(ExpeenseContext);
 
   expenses.filter((expense) => {
     const expenseDate = Date.parse(expense.date); // in milliseconds

@@ -18,9 +18,7 @@ const expensesReducer = (
       const id = new Date().toString() + Math.random().toString();
       return [{ ...action.payload, id }, ...state];
     case "EDIT":
-      const objIndex = state.findIndex(
-        (obj: any) => obj.id === action.payload.id
-      );
+      const objIndex = state.findIndex((obj) => obj.id === action.payload.id);
       const updatableItem = state[objIndex];
       const updatedItem = { ...updatableItem, ...action.payload.data };
       const updatedExpense = [...state];
@@ -33,7 +31,14 @@ const expensesReducer = (
   }
 };
 const ExpenseContextProvider = ({ children }: { children: ReactNode }) => {
-  const [expensesState, dispatch] = useReducer(expensesReducer, []);
+  const [expensesState, dispatch] = useReducer(expensesReducer, [
+    {
+      id: Math.random().toString(),
+      title: "Purchased Luis vuittion shoe",
+      amount: 99.8,
+      date: Date.now().toString(),
+    },
+  ]);
 
   const addExpense = (data: ExpensesI) => {
     dispatch({ type: "ADD", payload: { data } });

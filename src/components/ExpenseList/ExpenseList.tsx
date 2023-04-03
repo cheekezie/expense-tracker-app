@@ -4,7 +4,7 @@ import ExpenseItem from "./ExpenseItem";
 
 const ExpenseList = ({ expenses }: { expenses: ExpensesI[] }) => {
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <FlatList
         showsVerticalScrollIndicator={false}
         data={expenses}
