@@ -15,7 +15,7 @@ import {
 
 const ManageExpenseScreen = ({ navigation, route }: ManageExpenseNavPropsI) => {
   const editMode = !!route.params?.data;
-  const expenseToEdit = route.params?.data;
+  const expenseToEdit = route.params.data;
 
   const dispatch = useAppDispatch();
   const closeaAvigation = () => {
@@ -24,7 +24,7 @@ const ManageExpenseScreen = ({ navigation, route }: ManageExpenseNavPropsI) => {
 
   const handleConfirm = () => {
     if (editMode) {
-      dispatch(editExpense({} as ExpensesI));
+      dispatch(editExpense({ id: expenseToEdit?.id as string, data: {} }));
     } else {
       const expense: ExpensesI = {
         id: Math.random().toString(),

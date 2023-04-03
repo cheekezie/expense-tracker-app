@@ -1,5 +1,8 @@
-export type FavoriteContextType = {
-  ids: string[];
-  addFavorite: (id: string) => void;
-  removeFavorite: (id: string) => void;
+import { ExpensesI } from "./expenses";
+
+export type ExpenseContextType = {
+  expenses: ExpensesI[];
+  addExpense: (data: ExpensesI) => void;
+  removeExpense: (id: string) => void;
+  editExpense: (id: string, data: ExpensesI) => void;
 };

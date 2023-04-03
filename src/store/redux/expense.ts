@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   AddExpensesActionI,
+  EditExpensesActionI,
   ExpenseState,
   RemoveExpensesActionI,
 } from "../../types/redux";
@@ -25,7 +26,7 @@ export const expensesSlice = createSlice({
       );
       state.expenses.splice(objIndex, 1);
     },
-    editExpense: (state, action: AddExpensesActionI) => {
+    editExpense: (state, action: EditExpensesActionI) => {
       // const objIndex = state.expenses.findIndex(
       //   obj => obj.id === action.payload.id
       // );
@@ -34,7 +35,7 @@ export const expensesSlice = createSlice({
         if (expense.id === action.payload.id) {
           return {
             ...expense,
-            ...action.payload,
+            ...action.payload.data,
           };
         }
       });
