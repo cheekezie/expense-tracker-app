@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useReducer, useState } from "react";
-import { ExpenseContextType } from "../../types/context";
+import { ContextReducerPayload, ExpenseContextType } from "../../types/context";
 import { ExpensesI } from "../../types/expenses";
 
 export const ExpeenseContext = createContext<ExpenseContextType>({
@@ -10,7 +10,7 @@ export const ExpeenseContext = createContext<ExpenseContextType>({
 });
 
 const expensesReducer = (
-  state: any,
+  state: ExpensesI[],
   action: { type: "ADD" | "EDIT" | "DELETE"; payload: any }
 ) => {
   switch (action.type) {
@@ -27,23 +27,23 @@ const expensesReducer = (
       updatedExpense[objIndex] = updatedItem;
       return updatedExpense;
     case "DELETE":
-      return state.filter((expense: any) => expense.id !== action.payload);
+      return state.filter((expense) => expense.id !== action.payload.id);
     default:
       return state;
   }
 };
 const ExpenseContextProvider = ({ children }: { children: ReactNode }) => {
-  const [expensesState, dispatch] = useReducer(expensesReducer, {});
+  const [expensesState, dispatch] = useReducer(expensesReducer, []);
 
   const addExpense = (data: ExpensesI) => {
-    dispatch({ type: "ADD", payload: data });
+    dispatch({ type: "ADD", payload: { data } });
   };
   const editExpense = (id: string, data: ExpensesI) => {
-    dispatch({ type: "EDIT", payload: {} });
+    dispatch({ type: "EDIT", payload: { id, data } });
   };
 
   const removeExpense = (id: string) => {
-    dispatch({ type: "DELETE", payload: id });
+    dispatch({ type: "DELETE", payload: { id } });
   };
 
   const value: ExpenseContextType = {

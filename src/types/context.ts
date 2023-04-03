@@ -6,3 +6,8 @@ export type ExpenseContextType = {
   removeExpense: (id: string) => void;
   editExpense: (id: string, data: ExpensesI) => void;
 };
+
+export interface ContextReducerPayload {
+  id?: string;
+  data: ExpensesI;
+}
