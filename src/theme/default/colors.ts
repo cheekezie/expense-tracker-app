@@ -1,7 +1,9 @@
 import { ColorsI } from "../../types/colors";
 
 export const colors: ColorsI = {
-  primary: "##014E46",
+  primary: "#014E46",
+  primary500: "#a5f3eb",
+  primary700: "#519E96",
   secondary: "#D4AC0D",
   lightSecondary: "#e2b497",
   lightPrimary: "#519E96",
@@ -14,6 +16,6 @@ export const colors: ColorsI = {
   red: "#EF3240",
   white: "#FFF",
   liteOrange: "#F2AF01",
-  inactive: "#F4F4F4",
+  inactive: "#C4C4C4",
   inputBackground: "#E8E8E8",
 };

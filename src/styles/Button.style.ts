@@ -25,4 +25,20 @@ export const ButtonStyles = StyleSheet.create({
     marginBottom: 15,
     width: "100%",
   },
+  buttonBase: {
+    borderRadius: 4,
+    padding: 8,
+    backgroundColor: theme.Colors.primary,
+  },
+  flat: {
+    backgroundColor: "transparent",
+  },
+  buttonText: {
+    color: theme.Colors.white,
+    textAlign: "center",
+  },
+  flattText: {
+    color: theme.Colors.primary,
+    textAlign: "center",
+  },
 });

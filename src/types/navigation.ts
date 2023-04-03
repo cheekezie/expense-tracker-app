@@ -1,33 +1,36 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RouteProp } from "@react-navigation/native";
+import { ExpensesI } from "./expenses";
 
 // Interface for rootstack. Undefined if no value is passed, pass objects if param values are required
 export type RootStackParamList = {
-  CategoriesScreen: undefined;
   BottomTab: undefined;
-  FavoritesScreen: undefined;
+  ManageExpenseScreen: {
+    data?: ExpensesI;
+  };
   MealDetailsScreen: {
     mealId: string;
     mealTitle: string;
   };
-  MealsOverviewScreen: {
-    categoryId: string;
-  };
 };
 
-export interface CategoryScreenNavigationPropsI {
-  navigation: NativeStackNavigationProp<RootStackParamList, "CategoriesScreen">;
-}
 export interface BottomTabsPropsI {
   navigation: NativeStackNavigationProp<RootStackParamList, "BottomTab">;
 }
 
-export interface CategoryOvervieScreenNavPropsI {
+export interface MealDetailScreenNavPropsI {
   navigation: NativeStackNavigationProp<
     RootStackParamList,
-    "MealsOverviewScreen"
+    "MealDetailsScreen"
   >;
-  route: RouteProp<RootStackParamList, "MealsOverviewScreen">;
+  route: RouteProp<RootStackParamList, "MealDetailsScreen">;
+}
+export interface ManageExpenseNavPropsI {
+  navigation: NativeStackNavigationProp<
+    RootStackParamList,
+    "ManageExpenseScreen"
+  >;
+  route: RouteProp<RootStackParamList, "ManageExpenseScreen">;
 }
 // declare global {
 //   namespace ReactNavigation {

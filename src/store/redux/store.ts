@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import favoritesState from "./favorites";
+import expensesState from "./expense";
 
 export const store = configureStore({
   reducer: {
-    favorites: favoritesState,
+    expenses: expensesState,
   },
 });
 

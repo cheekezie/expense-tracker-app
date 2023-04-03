@@ -11,6 +11,7 @@ const screenOptions = {
     backgroundColor: theme.Colors.lightPrimary,
   },
   headerTintColor: "white",
+  // headerShown: false,
   contentStyle: {
     backgroundColor: theme.Colors.primary,
   },
@@ -21,6 +22,9 @@ const ExpensesStack = () => {
       <Stack.Screen
         name="RecentExpensesScreen"
         component={RecentExpensesScreen}
+        options={{
+          title: "Recent Expenses",
+        }}
       />
       <Stack.Group
         screenOptions={{

@@ -1,11 +1,12 @@
 import { GestureResponderEvent, StyleProp, ViewStyle } from "react-native";
-import Meal from "../models/meals";
+import { ExpensesI } from "./expenses";
+import { ReactNode } from "react";
 
-export interface GridTilePropsI {
-  cardStyle?: StyleProp<ViewStyle>;
-  title: string;
-  color: string;
+export interface CustomButtonPropsI {
+  buttonStyle?: StyleProp<ViewStyle>;
+  mode?: "flat";
   onPress?: (event: GestureResponderEvent) => void;
+  children: ReactNode;
 }
 
 export interface MealdetailsPropI {
@@ -16,6 +17,11 @@ export interface MealdetailsPropI {
   cardStyle?: StyleProp<ViewStyle>;
 }
 
-export interface MealsListngPropsI {
-  displayedMeals: Meal[];
+export interface ExpenseSummaryPropsI {
+  title: string;
+  value: string;
+}
+export interface ExpenseOutputPropsI {
+  expenses: ExpensesI[];
+  periodStats: ExpenseSummaryPropsI;
 }

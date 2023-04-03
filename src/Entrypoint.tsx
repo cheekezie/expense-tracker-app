@@ -1,26 +1,30 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import BottomTab from "./navigations/BottomTab";
+import ManageExpenseScreen from "./screens/ManageExpenseScreen";
 import theme from "./theme";
 
 const Entrypoint = () => {
   const RootStack = createNativeStackNavigator();
-  const screenOptions = {
-    headerStyle: {
-      backgroundColor: theme.Colors.lightPrimary,
-    },
-    headerTintColor: "white",
-    contentStyle: {
-      backgroundColor: theme.Colors.primary,
-    },
-  };
+
   return (
     <NavigationContainer>
-      <RootStack.Navigator screenOptions={screenOptions}>
+      <RootStack.Navigator>
         <RootStack.Screen
-          // options={{ headerShown: false }}
+          options={{ headerShown: false }}
           name="BottomTab"
           component={BottomTab}
+        />
+        <RootStack.Screen
+          name="ManageExpenseScreen"
+          component={ManageExpenseScreen as any}
+          options={{
+            presentation: "modal",
+            headerStyle: {
+              backgroundColor: theme.Colors.lightPrimary,
+            },
+            headerTintColor: "white",
+          }}
         />
       </RootStack.Navigator>
     </NavigationContainer>

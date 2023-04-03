@@ -1,8 +1,8 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { Provider } from "react-redux";
-import { store } from "./src/store/redux/store";
 import Entrypoint from "./src/Entrypoint";
+import { store } from "./src/store/redux/store";
 
 export default function App() {
   return (
