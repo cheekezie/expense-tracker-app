@@ -8,6 +8,9 @@ export interface ColorsI {
   darkSecondary: string;
   text: string;
   subtitle: string;
+  dark: string;
+  grey: string;
+  black: string;
   placeholder: string;
   buttonPrimary: string;
   buttonSecondary: string;

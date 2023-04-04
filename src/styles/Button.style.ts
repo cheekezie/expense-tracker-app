@@ -28,6 +28,8 @@ export const ButtonStyles = StyleSheet.create({
   buttonBase: {
     borderRadius: 4,
     padding: 8,
+    minHeight: 45,
+    justifyContent: "center",
     backgroundColor: theme.Colors.primary,
   },
   flat: {

@@ -6,10 +6,13 @@ import { useAppDispatch } from "../store/hooks/hooks";
 import { addExpense, editExpense, removeExpense } from "../store/redux/expense";
 import { ExpensesI } from "../types/expenses";
 import { ManageExpenseNavPropsI } from "../types/navigation";
+import ExpenseForm from "../components/ManageExpense/ExpenseForm";
+import Input from "../components/UI/Input";
 
 const ManageExpenseScreen = ({ navigation, route }: ManageExpenseNavPropsI) => {
   const editMode = !!route.params?.data;
   const expenseToEdit = route.params?.data;
+  const id = expenseToEdit?.id as string;
 
   const dispatch = useAppDispatch();
   const closeaAvigation = () => {
@@ -18,7 +21,7 @@ const ManageExpenseScreen = ({ navigation, route }: ManageExpenseNavPropsI) => {
 
   const handleConfirm = () => {
     if (editMode) {
-      dispatch(editExpense({ id: expenseToEdit?.id as string, data: {} }));
+      dispatch(editExpense({ id, data: {} }));
     } else {
       const expense: ExpensesI = {
         id: Math.random().toString(),
@@ -31,7 +34,7 @@ const ManageExpenseScreen = ({ navigation, route }: ManageExpenseNavPropsI) => {
     navigation.goBack();
   };
   const handleDelete = () => {
-    dispatch(removeExpense({ id: expenseToEdit?.id as string }));
+    dispatch(removeExpense({ id }));
     navigation.goBack();
   };
   useLayoutEffect(() => {
@@ -57,14 +60,17 @@ const ManageExpenseScreen = ({ navigation, route }: ManageExpenseNavPropsI) => {
       });
     }
   }, [navigation, route.params]);
+
+  const titleChanged = (value: any) => {
+    console.log(value);
+  };
+
   return (
     <View style={styles.container}>
-      <Button
-        buttonStyle={{ width: 150, alignSelf: "center" }}
-        onPress={handleConfirm}
-      >
-        {editMode ? "Save Changes" : "Add"}{" "}
-      </Button>
+      <ExpenseForm
+        onSubmit={handleConfirm}
+        buttonLabel={editMode ? "Save Changes" : "Add"}
+      />
     </View>
   );
 };
@@ -74,5 +80,7 @@ export default ManageExpenseScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingHorizontal: 20,
+    paddingVertical: 15,
   },
 });
