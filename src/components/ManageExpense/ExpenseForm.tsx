@@ -3,13 +3,36 @@ import theme from "../../theme";
 import Button from "../UI/Button";
 import CustomDateTimePicker from "../UI/CustomDateTimePicker";
 import Input from "../UI/Input";
+import { useState } from "react";
+import { ExpensesI } from "../../types/expenses";
 
-const ExpenseForm = (props: { onSubmit: any; buttonLabel: string }) => {
-  const titleChanged = (value: string) => {
-    console.log(value);
+const formatDate = (date: string) => {
+  return date ? new Date(date).toLocaleDateString() : "";
+};
+
+const ExpenseForm = (props: {
+  onSubmit: any;
+  buttonLabel: string;
+  expense: ExpensesI;
+}) => {
+  const expense = props.expense;
+  const [amountValue, setAmount] = useState(expense?.amount.toString());
+  const [dateValue, setDate] = useState(formatDate(expense?.date));
+  const [descriptionValue, setDescription] = useState(expense?.description);
+
+  const amountChanged = (value: string) => {
+    setAmount(value);
   };
+
   const dateChanged = (value: string) => {
-    console.log(value);
+    setDate(value);
+  };
+
+  const descriptionChanged = (value: string) => {
+    setDescription(value);
+  };
+  const handleSubmit = () => {
+    props.onSubmit();
   };
 
   return (
@@ -18,7 +41,12 @@ const ExpenseForm = (props: { onSubmit: any; buttonLabel: string }) => {
         label="Amount"
         bordered={true}
         coloreTheme="primary"
-        inputOptions={{ inputMode: "decimal", keyboardType: "decimal-pad" }}
+        inputOptions={{
+          inputMode: "decimal",
+          keyboardType: "decimal-pad",
+          onChangeText: amountChanged,
+          value: amountValue,
+        }}
       ></Input>
       <Input
         label="Date"
@@ -27,8 +55,10 @@ const ExpenseForm = (props: { onSubmit: any; buttonLabel: string }) => {
         mask={"[000] [00] [00]"}
         inputOptions={{
           inputMode: "text",
-          placeholder: "YYYY-MM-DD",
+          placeholder: "DD/MM/YYYY",
           maxLength: 10,
+          onChangeText: dateChanged,
+          value: dateValue,
         }}
       ></Input>
       {/* <CustomDateTimePicker
@@ -43,7 +73,8 @@ const ExpenseForm = (props: { onSubmit: any; buttonLabel: string }) => {
         inputOptions={{
           inputMode: "text",
           multiline: true,
-          onChangeText: titleChanged,
+          onChangeText: descriptionChanged,
+          value: descriptionValue,
         }}
       ></Input>
 

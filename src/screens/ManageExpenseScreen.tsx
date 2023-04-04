@@ -11,7 +11,7 @@ import Input from "../components/UI/Input";
 
 const ManageExpenseScreen = ({ navigation, route }: ManageExpenseNavPropsI) => {
   const editMode = !!route.params?.data;
-  const expenseToEdit = route.params?.data;
+  const expenseToEdit = route.params?.data as ExpensesI;
   const id = expenseToEdit?.id as string;
 
   const dispatch = useAppDispatch();
@@ -25,9 +25,9 @@ const ManageExpenseScreen = ({ navigation, route }: ManageExpenseNavPropsI) => {
     } else {
       const expense: ExpensesI = {
         id: Math.random().toString(),
-        title: "Purchased new shoe",
+        description: "Purchased new shoe",
         amount: 99.8,
-        date: Date.now().toString(),
+        date: new Date(Date.now()).toString(),
       };
       dispatch(addExpense(expense));
     }
@@ -39,7 +39,7 @@ const ManageExpenseScreen = ({ navigation, route }: ManageExpenseNavPropsI) => {
   };
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: editMode ? expenseToEdit?.title : "Add Expense",
+      title: editMode ? expenseToEdit?.description : "Add Expense",
       headerLeft: ({ tintColor }) => (
         <HeaderIconButton
           icon={"close"}
@@ -68,6 +68,7 @@ const ManageExpenseScreen = ({ navigation, route }: ManageExpenseNavPropsI) => {
   return (
     <View style={styles.container}>
       <ExpenseForm
+        expense={expenseToEdit}
         onSubmit={handleConfirm}
         buttonLabel={editMode ? "Save Changes" : "Add"}
       />
