@@ -5,6 +5,8 @@ import { ExpenseOutputPropsI } from "../../types/props";
 import theme from "../../theme";
 import Button from "../UI/Button";
 import { useNavigation } from "@react-navigation/native";
+import Loading from "../UI/Indicator/Loading";
+import ErrorOverlay from "../UI/Indicator/ErrorOverlay";
 
 const EmptyState = () => {
   const navigation = useNavigation<any>();
@@ -26,8 +28,24 @@ const EmptyState = () => {
   );
 };
 
-const ExpensesOutput = ({ expenses, periodStats }: ExpenseOutputPropsI) => {
-  return (
+const ExpensesOutput = ({
+  expenses,
+  periodStats,
+  isLoading,
+  error,
+  handlePress,
+}: ExpenseOutputPropsI) => {
+  if (isLoading) {
+    return <Loading />;
+  }
+  return error?.isError ? (
+    <ErrorOverlay
+      title={error?.title}
+      message={error?.message}
+      onPress={handlePress}
+      buttonLabel={error?.buttonLabel}
+    />
+  ) : (
     <View style={styles.container}>
       <ExpensesSummary {...periodStats} />
       {expenses.length > 0 ? (

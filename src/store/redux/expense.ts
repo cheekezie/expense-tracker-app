@@ -4,6 +4,7 @@ import {
   EditExpensesActionI,
   ExpenseState,
   RemoveExpensesActionI,
+  SetExpensesActionI,
 } from "../../types/redux";
 import { RootState } from "./store";
 
@@ -14,11 +15,13 @@ const initialState: ExpenseState = {
 
 export const expensesSlice = createSlice({
   name: "expenses",
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
     addExpense: (state, action: AddExpensesActionI) => {
-      state.expenses.push(action.payload);
+      state.expenses.unshift(action.payload);
+    },
+    setExpenses: (state, action: SetExpensesActionI) => {
+      state.expenses = action.payload.reverse();
     },
     removeExpense: (state, action: RemoveExpensesActionI) => {
       const objIndex = state.expenses.findIndex(
@@ -27,23 +30,19 @@ export const expensesSlice = createSlice({
       state.expenses.splice(objIndex, 1);
     },
     editExpense: (state, action: EditExpensesActionI) => {
-      // const objIndex = state.expenses.findIndex(
-      //   obj => obj.id === action.payload.id
-      // );
-      // state.expenses[objIndex] = action.payload
-      state.expenses.map((expense) => {
-        if (expense.id === action.payload.id) {
-          return {
-            ...expense,
-            ...action.payload.data,
-          };
-        }
-      });
+      const objIndex = state.expenses.findIndex(
+        (obj) => obj.id === action.payload.id
+      );
+      state.expenses[objIndex] = {
+        ...state.expenses[objIndex],
+        ...action.payload.data,
+      };
     },
   },
 });
 
-export const { addExpense, editExpense, removeExpense } = expensesSlice.actions;
+export const { addExpense, editExpense, setExpenses, removeExpense } =
+  expensesSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectExpenses = (state: RootState) => state.expenses.expenses;

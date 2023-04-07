@@ -8,12 +8,16 @@ const Button = ({
   mode,
   children,
   buttonStyle,
+  disabled,
 }: CustomButtonPropsI) => {
   return (
     <View>
       <Pressable
         onPress={onPress}
-        style={({ pressed }) => pressed && DisplayStyles.clickFeedback}
+        disabled={disabled}
+        style={({ pressed }) =>
+          (pressed || disabled) && DisplayStyles.clickFeedback
+        }
       >
         <View
           style={[

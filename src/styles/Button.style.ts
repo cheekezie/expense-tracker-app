@@ -25,6 +25,10 @@ export const ButtonStyles = StyleSheet.create({
     marginBottom: 15,
     width: "100%",
   },
+  defaultButton: {
+    width: 150,
+    alignSelf: "center",
+  },
   buttonBase: {
     borderRadius: 4,
     padding: 8,

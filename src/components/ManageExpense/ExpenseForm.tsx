@@ -1,37 +1,29 @@
+import { useState } from "react";
 import {
-  Alert,
-  Keyboard,
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
   Text,
   View,
 } from "react-native";
-import theme from "../../theme";
-import Button from "../UI/Button";
-import CustomDateTimePicker from "../UI/CustomDateTimePicker";
-import Input from "../UI/Input";
-import { useState } from "react";
-import { ExpensesI } from "../../types/expenses";
+import { ActivityIndicator } from "react-native-paper";
 import { DisplayStyles } from "../../styles/Display.style";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import theme from "../../theme";
+import { ExpensesI } from "../../types/expenses";
+import Button from "../UI/Button";
+import Input from "../UI/Input";
 
-const formatDate = (date: string) => {
-  return date ? new Date(date).toLocaleDateString() : "";
-};
-
-const defaultValue = {
-  amount: { value: "", isValid: false },
-  date: { value: "", isValid: false },
-  description: { value: "", isValid: false },
-};
-const ExpenseForm = (props: {
+const ExpenseForm = ({
+  onSubmit,
+  buttonLabel,
+  expense,
+  isLoading,
+}: {
   onSubmit: any;
   buttonLabel: string;
   expense: ExpensesI;
+  isLoading: boolean;
 }) => {
-  const expense = props.expense;
-
   const [inputValue, setInputValue] = useState({
     amount: {
       value: expense?.amount ? expense.amount : "",
@@ -89,7 +81,7 @@ const ExpenseForm = (props: {
       date: inputValue.date.value,
       description: inputValue.description.value,
     };
-    props.onSubmit(dataToSubmit);
+    onSubmit(dataToSubmit);
   };
 
   return (
@@ -154,10 +146,14 @@ const ExpenseForm = (props: {
         ></Input>
         <View style={DisplayStyles.flex}>
           <Button
-            buttonStyle={{ width: 150, alignSelf: "center" }}
+            buttonStyle={styles.button}
             onPress={handleSubmit}
+            disabled={isLoading}
           >
-            {props.buttonLabel}
+            {!isLoading && buttonLabel}
+            {isLoading && (
+              <ActivityIndicator size={"small"} color={theme.Colors.white} />
+            )}
           </Button>
         </View>
       </View>
@@ -177,5 +173,11 @@ const styles = StyleSheet.create({
   errorText: {
     color: theme.Colors.red,
     fontSize: 12,
+  },
+  button: {
+    width: 150,
+    alignItems: "center",
+    alignSelf: "center",
+    justifyContent: "center",
   },
 });

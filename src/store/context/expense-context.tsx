@@ -7,16 +7,18 @@ export const ExpeenseContext = createContext<ExpenseContextType>({
   addExpense: ({}) => {},
   removeExpense: (id: string) => {},
   editExpense: (id: string, {}) => {},
+  setExpenses: (expenses: ExpensesI[]) => {},
 });
 
 const expensesReducer = (
   state: ExpensesI[],
-  action: { type: "ADD" | "EDIT" | "DELETE"; payload: any }
+  action: { type: "ADD" | "EDIT" | "DELETE" | "SET"; payload: any }
 ) => {
   switch (action.type) {
     case "ADD":
-      const id = new Date().toString() + Math.random().toString();
-      return [{ ...action.payload, id }, ...state];
+      return [action.payload, ...state];
+    case "SET":
+      return action.payload.reverse();
     case "EDIT":
       const objIndex = state.findIndex((obj) => obj.id === action.payload.id);
       const updatableItem = state[objIndex];
@@ -43,6 +45,11 @@ const ExpenseContextProvider = ({ children }: { children: ReactNode }) => {
   const addExpense = (data: ExpensesI) => {
     dispatch({ type: "ADD", payload: { data } });
   };
+
+  const setExpenses = (data: ExpensesI[]) => {
+    dispatch({ type: "SET", payload: data });
+  };
+
   const editExpense = (id: string, data: ExpensesI) => {
     dispatch({ type: "EDIT", payload: { id, data } });
   };
@@ -53,9 +60,10 @@ const ExpenseContextProvider = ({ children }: { children: ReactNode }) => {
 
   const value: ExpenseContextType = {
     expenses: expensesState,
-    addExpense,
+    addExpense, // uses short hand method to assign values becsue they have same name
     removeExpense,
     editExpense,
+    setExpenses,
   };
 
   return (

@@ -17,6 +17,7 @@ export interface CustomButtonPropsI {
   mode?: "flat";
   onPress?: (event: GestureResponderEvent) => void;
   children: ReactNode;
+  disabled?: boolean;
 }
 
 export interface MealdetailsPropI {
@@ -34,6 +35,16 @@ export interface ExpenseSummaryPropsI {
 export interface ExpenseOutputPropsI {
   expenses: ExpensesI[];
   periodStats: ExpenseSummaryPropsI;
+  isLoading: boolean;
+  error?: ErrorDataI;
+  handlePress?: () => void;
+}
+
+export interface ErrorDataI {
+  isError: boolean;
+  title?: string;
+  message?: string;
+  buttonLabel?: string;
 }
 export interface InputPropsI {
   label?: string;

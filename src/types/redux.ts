@@ -15,6 +15,10 @@ export interface AddExpensesActionI {
   type: string;
   payload: ExpensesI;
 }
+export interface SetExpensesActionI {
+  type: string;
+  payload: ExpensesI[];
+}
 export interface EditExpensesActionI {
   type: string;
   payload: {
