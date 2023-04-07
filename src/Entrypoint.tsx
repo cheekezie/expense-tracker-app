@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import BottomTab from "./navigations/BottomTab";
 import ManageExpenseScreen from "./screens/ManageExpenseScreen";
 import theme from "./theme";
+import AuthenticationStack from "./navigations/AuthenticationStack";
 
 const Entrypoint = () => {
   const RootStack = createNativeStackNavigator();
@@ -14,6 +15,11 @@ const Entrypoint = () => {
           options={{ headerShown: false }}
           name="BottomTab"
           component={BottomTab}
+        />
+        <RootStack.Screen
+          // options={{ headerShown: false }}
+          name="AuthenticationStack"
+          component={AuthenticationStack}
         />
         <RootStack.Screen
           name="ManageExpenseScreen"

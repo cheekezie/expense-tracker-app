@@ -56,9 +56,8 @@ const ExpenseForm = ({
     setSubmission(true);
     const amountIsValid =
       !isNaN(+inputValue.amount.value) && +inputValue.amount.value > 0;
-    const dateIsvalid =
-      new Date(inputValue.date.value).toString() !== "Invalid Date" &&
-      inputValue.date.value.length === 10;
+    const regex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+    const dateIsvalid = regex.test(inputValue.date.value.trim());
     const descIsValid = inputValue.description.value?.trim().length > 0;
     if (!amountIsValid || !dateIsvalid || !descIsValid) {
       setInputValue((currentInputValue) => {
@@ -81,7 +80,7 @@ const ExpenseForm = ({
       date: inputValue.date.value,
       description: inputValue.description.value,
     };
-    onSubmit(dataToSubmit);
+    //0onSubmit(dataToSubmit);
   };
 
   return (
