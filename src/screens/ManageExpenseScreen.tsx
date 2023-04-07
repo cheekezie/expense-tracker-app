@@ -19,17 +19,12 @@ const ManageExpenseScreen = ({ navigation, route }: ManageExpenseNavPropsI) => {
     navigation.goBack();
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = (form: ExpensesI) => {
     if (editMode) {
-      dispatch(editExpense({ id, data: {} }));
+      dispatch(editExpense({ id, data: form }));
     } else {
-      const expense: ExpensesI = {
-        id: Math.random().toString(),
-        description: "Purchased new shoe",
-        amount: 99.8,
-        date: new Date(Date.now()).toString(),
-      };
-      dispatch(addExpense(expense));
+      form.id = Math.random().toString();
+      dispatch(addExpense(form));
     }
     navigation.goBack();
   };

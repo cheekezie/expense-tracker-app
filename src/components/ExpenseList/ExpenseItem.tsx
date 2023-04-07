@@ -17,6 +17,9 @@ const ExpenseItem = ({ expense }: { expense: ExpensesI }) => {
   const formatDate = (date: string) => {
     return new Date(date).toLocaleDateString();
   };
+  const formatAmount = (amount: string) => {
+    return Number(amount).toFixed(2);
+  };
   return (
     <Pressable
       android_ripple={{ color: "#ccc" }}
@@ -31,7 +34,7 @@ const ExpenseItem = ({ expense }: { expense: ExpensesI }) => {
           <Text style={styles.textBase}>{formatDate(expense.date)}</Text>
         </View>
         <View style={styles.amountContainer}>
-          <Text style={styles.amountText}>${expense.amount.toFixed(2)}</Text>
+          <Text style={styles.amountText}>${formatAmount(expense.amount)}</Text>
         </View>
       </View>
     </Pressable>

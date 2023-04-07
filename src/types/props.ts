@@ -39,6 +39,7 @@ export interface InputPropsI {
   label?: string;
   mask?: string;
   inputOptions: InputOptionsI;
+  errorMessage?: string;
   inputStyle?: StyleProp<ViewStyle>;
   labelStyle?: StyleProp<ViewStyle>;
   bordered?: boolean;

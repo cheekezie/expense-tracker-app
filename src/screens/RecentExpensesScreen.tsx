@@ -18,7 +18,7 @@ const RecentExpensesScreen = () => {
 
   const expenseSum = expenses
     .reduce((sum, expense) => {
-      return sum + expense.amount;
+      return sum + Number(expense.amount);
     }, 0)
     .toFixed(1);
   const periodStats = { title: "Last 7 days", value: expenseSum };

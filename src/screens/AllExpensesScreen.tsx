@@ -8,7 +8,7 @@ const AllExpensesScreen = () => {
 
   const expenseSum = expenses
     .reduce((sum, expense) => {
-      return sum + expense.amount;
+      return sum + Number(expense.amount);
     }, 0)
     .toFixed(1);
   const periodStats = { title: "Total", value: expenseSum };

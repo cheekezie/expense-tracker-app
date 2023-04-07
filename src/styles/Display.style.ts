@@ -22,4 +22,7 @@ export const DisplayStyles = StyleSheet.create({
   clickFeedback: {
     opacity: 0.25,
   },
+  flex: {
+    flex: 1,
+  },
 });

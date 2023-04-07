@@ -6,6 +6,7 @@ import theme from "../../theme";
 const Input = ({
   label,
   mask,
+  errorMessage,
   inputOptions,
   inputStyle,
   labelStyle,
@@ -34,9 +35,11 @@ const Input = ({
           inputThemeStyle,
           inputStyle,
           inputOptions.multiline && styles.alignTop,
+          !!errorMessage && styles.errorBorder,
         ]}
         {...inputOptions}
       />
+      {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
     </View>
   );
 };
@@ -58,8 +61,17 @@ const styles = StyleSheet.create({
     minHeight: 45,
     borderRadius: 6,
     verticalAlign: "middle",
+    marginBottom: 5,
   },
   alignTop: {
     verticalAlign: "top",
+  },
+  errorText: {
+    color: theme.Colors.red,
+    fontSize: 12,
+  },
+
+  errorBorder: {
+    borderColor: theme.Colors.red,
   },
 });
