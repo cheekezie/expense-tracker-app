@@ -4,23 +4,28 @@ import theme from "../theme";
 import WelcomeScreen from "../screens/WelcomeScreen";
 import SignInScreen from "../screens/SignInScreen";
 import SignUpScreen from "../screens/SignUpScreen";
+import HeaderIconButton from "../components/HeaderIconButton";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 const Stack = createNativeStackNavigator();
 
 const screenOptions = {
   headerStyle: {
-    backgroundColor: theme.Colors.lightPrimary,
-  },
-  headerTintColor: "white",
-  // headerShown: false,
-  contentStyle: {
     backgroundColor: theme.Colors.primary,
+  },
+  //headerShown: false,
+  headerTintColor: theme.Colors.white,
+  contentStyle: {
+    //backgroundColor: theme.Colors.w,
   },
 };
 
 const AuthenticationStack = () => {
   return (
-    <Stack.Navigator screenOptions={screenOptions}>
+    <Stack.Navigator
+      screenOptions={screenOptions}
+      initialRouteName="SignInScreen"
+    >
       <Stack.Screen
         name="WelcomeScreen"
         component={WelcomeScreen}
@@ -28,9 +33,17 @@ const AuthenticationStack = () => {
           title: "Welcome",
         }}
       />
-
-      <Stack.Screen name="AddExpenseScreen" component={SignInScreen} />
-      <Stack.Screen name="EditExpenseScreen" component={SignUpScreen} />
+      <Stack.Group
+        screenOptions={{
+          title: "",
+          //   headerLeft: ({ tintColor }) => (
+          //     <HeaderIconButton icon={"arrow-back"} color={tintColor as string} />
+          //   ),
+        }}
+      >
+        <Stack.Screen name="SignInScreen" component={SignInScreen} />
+        <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+      </Stack.Group>
     </Stack.Navigator>
   );
 };

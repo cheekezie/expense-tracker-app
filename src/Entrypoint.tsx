@@ -4,6 +4,7 @@ import BottomTab from "./navigations/BottomTab";
 import ManageExpenseScreen from "./screens/ManageExpenseScreen";
 import theme from "./theme";
 import AuthenticationStack from "./navigations/AuthenticationStack";
+import ProfileScreenStack from "./navigations/ProfileScreen";
 
 const Entrypoint = () => {
   const RootStack = createNativeStackNavigator();
@@ -13,13 +14,18 @@ const Entrypoint = () => {
       <RootStack.Navigator>
         <RootStack.Screen
           options={{ headerShown: false }}
+          name="AuthenticationStack"
+          component={AuthenticationStack}
+        />
+        <RootStack.Screen
+          options={{ headerShown: false }}
           name="BottomTab"
           component={BottomTab}
         />
         <RootStack.Screen
-          // options={{ headerShown: false }}
-          name="AuthenticationStack"
-          component={AuthenticationStack}
+          options={{ headerShown: false }}
+          name="ProfileScreenStack"
+          component={ProfileScreenStack}
         />
         <RootStack.Screen
           name="ManageExpenseScreen"

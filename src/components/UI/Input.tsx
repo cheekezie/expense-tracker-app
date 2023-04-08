@@ -1,11 +1,13 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { InputPropsI } from "../../types/props";
 import { TextInput } from "react-native";
 import theme from "../../theme";
+import { useState } from "react";
+import { Ionicons } from "@expo/vector-icons";
 
 const Input = ({
   label,
-  mask,
+  secureText,
   errorMessage,
   inputOptions,
   inputStyle,
@@ -13,6 +15,16 @@ const Input = ({
   bordered,
   coloreTheme,
 }: InputPropsI) => {
+  // to set default false value for multi line option if none is set
+  inputOptions.multiline = inputOptions.multiline
+    ? inputOptions.multiline
+    : false;
+  const [secure, setSecure] = useState(secureText);
+
+  const handleSecureText = () => {
+    setSecure(!secure);
+  };
+
   const inputThemeStyle = {
     borderWidth: bordered ? 1 : 0,
     borderColor:
@@ -28,17 +40,31 @@ const Input = ({
   return (
     <View style={styles.inputContainer}>
       {label && <Text style={[styles.inputLabel, labelStyle]}>{label}</Text>}
-      <TextInput
-        multiline
-        style={[
-          styles.textInputBase,
-          inputThemeStyle,
-          inputStyle,
-          inputOptions.multiline && styles.alignTop,
-          !!errorMessage && styles.errorBorder,
-        ]}
-        {...inputOptions}
-      />
+      <View>
+        <TextInput
+          multiline
+          style={[
+            styles.textInputBase,
+            inputThemeStyle,
+            inputStyle,
+            inputOptions.multiline && styles.alignTop,
+            !!errorMessage && styles.errorBorder,
+          ]}
+          {...inputOptions}
+          secureTextEntry={secure}
+        />
+        {secureText && (
+          <Pressable onPress={handleSecureText}>
+            <View style={styles.passwordToggle}>
+              <Ionicons
+                name={secure ? "eye-off" : "eye"}
+                size={24}
+                color={theme.Colors.primary}
+              />
+            </View>
+          </Pressable>
+        )}
+      </View>
       {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
     </View>
   );
@@ -62,6 +88,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     verticalAlign: "middle",
     marginBottom: 5,
+    // textTransform: "lowercase",
   },
   alignTop: {
     verticalAlign: "top",
@@ -73,5 +100,10 @@ const styles = StyleSheet.create({
 
   errorBorder: {
     borderColor: theme.Colors.red,
+  },
+  passwordToggle: {
+    position: "absolute",
+    bottom: 15,
+    right: 10,
   },
 });

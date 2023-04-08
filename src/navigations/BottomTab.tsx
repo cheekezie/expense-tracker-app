@@ -31,6 +31,15 @@ const BottomTab = () => {
             }}
           />
         ),
+        headerLeft: ({ tintColor }) => (
+          <HeaderIconButton
+            icon={"person"}
+            color={tintColor as string}
+            onPress={() => {
+              navigation.navigate("ProfileScreenStack");
+            }}
+          />
+        ),
       })}
     >
       <Tab.Screen

@@ -5,6 +5,8 @@ import { ExpensesI } from "./expenses";
 // Interface for rootstack. Undefined if no value is passed, pass objects if param values are required
 export type RootStackParamList = {
   BottomTab: undefined;
+  SignInScreen: undefined;
+  SignUpScreen: undefined;
   ManageExpenseScreen: {
     data?: ExpensesI;
   };
@@ -16,6 +18,9 @@ export type RootStackParamList = {
 
 export interface BottomTabsPropsI {
   navigation: NativeStackNavigationProp<RootStackParamList, "BottomTab">;
+}
+export interface GenericNavPropsI {
+  navigation: NativeStackNavigationProp<RootStackParamList>;
 }
 
 export interface MealDetailScreenNavPropsI {
@@ -32,8 +37,8 @@ export interface ManageExpenseNavPropsI {
   >;
   route: RouteProp<RootStackParamList, "ManageExpenseScreen">;
 }
-// declare global {
-//   namespace ReactNavigation {
-//     interface RootParamList extends RootStackParamList {}
-//   }
-// }
+declare global {
+  namespace ReactNavigation {
+    interface RootParamList extends RootStackParamList {}
+  }
+}

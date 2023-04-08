@@ -54,6 +54,7 @@ export interface InputPropsI {
   inputStyle?: StyleProp<ViewStyle>;
   labelStyle?: StyleProp<ViewStyle>;
   bordered?: boolean;
+  secureText?: boolean;
   coloreTheme?: "primary" | "grey" | "secondary" | "dark" | "black";
 }
 

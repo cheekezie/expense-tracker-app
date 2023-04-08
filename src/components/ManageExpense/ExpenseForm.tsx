@@ -1,17 +1,13 @@
 import { useState } from "react";
-import {
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { KeyboardAvoidingView, Platform, Text, View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import { DisplayStyles } from "../../styles/Display.style";
+import { FormStyles } from "../../styles/FormStyles";
 import theme from "../../theme";
 import { ExpensesI } from "../../types/expenses";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
+import { dateValidator } from "../../Helpers/validators";
 
 const ExpenseForm = ({
   onSubmit,
@@ -40,10 +36,6 @@ const ExpenseForm = ({
   });
   const [submited, setSubmission] = useState(false);
 
-  const dateChanged = (value: string) => {
-    // setDate(value);
-  };
-
   const inputCHangeHandler = (inputField: string, value: string) => {
     setInputValue((currentInputValues) => {
       return {
@@ -56,8 +48,7 @@ const ExpenseForm = ({
     setSubmission(true);
     const amountIsValid =
       !isNaN(+inputValue.amount.value) && +inputValue.amount.value > 0;
-    const regex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
-    const dateIsvalid = regex.test(inputValue.date.value.trim());
+    const dateIsvalid = dateValidator(inputValue.date.value.trim());
     const descIsValid = inputValue.description.value?.trim().length > 0;
     if (!amountIsValid || !dateIsvalid || !descIsValid) {
       setInputValue((currentInputValue) => {
@@ -80,7 +71,7 @@ const ExpenseForm = ({
       date: inputValue.date.value,
       description: inputValue.description.value,
     };
-    //0onSubmit(dataToSubmit);
+    onSubmit(dataToSubmit);
   };
 
   return (
@@ -89,7 +80,7 @@ const ExpenseForm = ({
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <View>
-        <Text style={styles.title}>Your Expense</Text>
+        <Text style={FormStyles.title}>Your Expense</Text>
         <Input
           label="Amount"
           bordered={true}
@@ -122,11 +113,6 @@ const ExpenseForm = ({
             value: inputValue.date.value,
           }}
         ></Input>
-        {/* <CustomDateTimePicker
-        textColor={theme.Colors.primary}
-        dateChanged={dateChanged}
-        mode="date"
-      /> */}
         <Input
           label="Description"
           bordered={true}
@@ -145,7 +131,7 @@ const ExpenseForm = ({
         ></Input>
         <View style={DisplayStyles.flex}>
           <Button
-            buttonStyle={styles.button}
+            buttonStyle={FormStyles.button}
             onPress={handleSubmit}
             disabled={isLoading}
           >
@@ -161,22 +147,3 @@ const ExpenseForm = ({
 };
 
 export default ExpenseForm;
-const styles = StyleSheet.create({
-  title: {
-    color: theme.Colors.black,
-    fontSize: 32,
-    marginBottom: 20,
-    textAlign: "center",
-    marginTop: 20,
-  },
-  errorText: {
-    color: theme.Colors.red,
-    fontSize: 12,
-  },
-  button: {
-    width: 150,
-    alignItems: "center",
-    alignSelf: "center",
-    justifyContent: "center",
-  },
-});

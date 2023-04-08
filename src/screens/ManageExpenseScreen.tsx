@@ -11,6 +11,7 @@ import Input from "../components/UI/Input";
 import { createExpense, deleteExpense, updateExpense } from "../Services/api";
 import { ErrorDataI } from "../types/props";
 import ErrorOverlay from "../components/UI/Indicator/ErrorOverlay";
+import { FormStyles } from "../styles/FormStyles";
 
 const ManageExpenseScreen = ({ navigation, route }: ManageExpenseNavPropsI) => {
   const [isLoading, setLoading] = useState(false);
@@ -102,7 +103,7 @@ const ManageExpenseScreen = ({ navigation, route }: ManageExpenseNavPropsI) => {
     );
   }
   return (
-    <View style={styles.container}>
+    <View style={FormStyles.container}>
       <ExpenseForm
         expense={expenseToEdit}
         onSubmit={handleConfirm}
@@ -114,11 +115,3 @@ const ManageExpenseScreen = ({ navigation, route }: ManageExpenseNavPropsI) => {
 };
 
 export default ManageExpenseScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-  },
-});

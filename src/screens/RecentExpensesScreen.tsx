@@ -12,6 +12,7 @@ import { getExpenses } from "../Services/api";
 import { ExpensesI } from "../types/expenses";
 import Loading from "../components/UI/Indicator/Loading";
 import { ErrorDataI } from "../types/props";
+import { getUserProfile } from "../store/redux/auth.redux";
 
 const RecentExpensesScreen = () => {
   const [isLoading, setLoading] = useState(true);
