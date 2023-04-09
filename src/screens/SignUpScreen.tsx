@@ -10,6 +10,8 @@ import { createUser } from "../Services/api";
 import { AuthMode } from "../types/Enums/auth";
 import { setUser } from "../store/redux/auth.redux";
 import { GenericNavPropsI } from "../types/navigation";
+import { local_save } from "../store/local/asyncstore";
+import { StoreName } from "../types/Enums/store.ENUMS";
 
 const SignUpScreen = ({ navigation }: GenericNavPropsI) => {
   const [isLoading, setLoading] = useState(false);

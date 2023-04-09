@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import expensesState from "./expense";
 import userState from "./auth.redux";
+import appState from "./app.redux";
 
 export const store = configureStore({
   reducer: {
     expenses: expensesState,
     user: userState,
+    appState,
   },
 });
 

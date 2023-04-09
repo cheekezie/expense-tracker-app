@@ -6,11 +6,18 @@ import {
   SinUpResponse,
 } from "../types/auth";
 import { ExpensesI } from "../types/expenses";
+import { local_get } from "../store/local/asyncstore";
+import { StoreName } from "../types/Enums/store.ENUMS";
 
 const firebaseKey = "AIzaSyB_GkFzLfYeck0YXgxWHmTlvUaJJPl2Xnw";
 const baseUrl = "https://my-expense-tracker-react-default-rtdb.firebaseio.com/";
 const authUrl = `https://identitytoolkit.googleapis.com/v1/accounts:`;
-const userId = "NaV7K9GopbgkEH1aYaDvlRWntA73";
+
+let userId = "";
+
+local_get(StoreName.USER).then((res: AuthResponseI) => {
+  userId = res?.localId;
+});
 
 const getRequest = (url: string, method: "post" | "get" | "delete") => {
   axios[method];

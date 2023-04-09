@@ -7,6 +7,11 @@ export interface ExpenseState {
 }
 export interface AuthState {
   user: AuthResponseI | null;
+  isLoggedIn: boolean;
+}
+export interface ApplicationState {
+  isAppLoading: boolean;
+  skip_upv_screens: boolean;
 }
 
 export interface RemoveExpensesActionI {
@@ -38,4 +43,8 @@ export interface StoreTokenI {
 export interface StoreUserI {
   type: string;
   payload: AuthResponseI;
+}
+export interface SetAppStateI {
+  type: string;
+  payload: boolean;
 }

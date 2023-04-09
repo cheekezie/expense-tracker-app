@@ -10,10 +10,22 @@ import {
 } from "../../types/redux";
 import { RootState } from "./store";
 import { AuthResponseI } from "../../types/auth";
+import { local_get, local_remove, local_save } from "../local/asyncstore";
+import { StoreName } from "../../types/Enums/store.ENUMS";
+import { setAppLoading } from "./app.redux";
 
 // Define the initial state using that type
 const initialState: AuthState = {
   user: null,
+  isLoggedIn: false,
+};
+
+// Set local store data
+const storeUser = async (data: AuthResponseI) => {
+  await local_save(StoreName.USER, data);
+};
+const doLogout = async () => {
+  await local_remove(StoreName.USER);
 };
 
 export const authSlice = createSlice({
@@ -22,9 +34,13 @@ export const authSlice = createSlice({
   reducers: {
     clearAuth: (state) => {
       state.user = null;
+      state.isLoggedIn = false;
+      doLogout();
     },
     setUser: (state, action: StoreUserI) => {
+      storeUser(action.payload);
       state.user = action.payload;
+      state.isLoggedIn = true;
     },
   },
 });
@@ -32,6 +48,7 @@ export const authSlice = createSlice({
 export const { clearAuth, setUser } = authSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
-export const getUserProfile = (state: RootState) => state.user;
+export const getUserProfile = (state: RootState) => state.user.user;
+export const isUserLoggedIn = (state: RootState) => state.user.isLoggedIn;
 
 export default authSlice.reducer;

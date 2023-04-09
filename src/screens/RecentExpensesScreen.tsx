@@ -24,7 +24,7 @@ const RecentExpensesScreen = () => {
   // const expensesCtx = useContext(ExpeenseContext);
   // const expenses = useContext(ExpeenseContext).expenses;
 
-  expenses.filter((expense) => {
+  const recentExpenses = expenses.filter((expense) => {
     const expenseDate = Date.parse(expense.date); // in milliseconds
     const today = Date.now(); // in milliseconds
     const millisecondsInAWeek = 604800000;
@@ -44,8 +44,6 @@ const RecentExpensesScreen = () => {
       setError({ isError: false });
       setLoading(false);
     } catch (error) {
-      console.log(error);
-
       setLoading(false);
       setError({ isError: true, buttonLabel: "Close" });
     }
@@ -54,7 +52,7 @@ const RecentExpensesScreen = () => {
     myExpenses();
   }, []);
 
-  const expenseSum = expenses
+  const expenseSum = recentExpenses
     .reduce((sum, expense) => {
       return sum + Number(expense.amount);
     }, 0)
@@ -62,7 +60,7 @@ const RecentExpensesScreen = () => {
   const periodStats = { title: "Last 7 days", value: expenseSum };
   return (
     <ExpensesOutput
-      expenses={expenses}
+      expenses={recentExpenses}
       periodStats={periodStats}
       isLoading={isLoading}
       error={isError}
