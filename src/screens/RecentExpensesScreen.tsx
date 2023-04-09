@@ -44,6 +44,8 @@ const RecentExpensesScreen = () => {
       setError({ isError: false });
       setLoading(false);
     } catch (error) {
+      console.log(error);
+
       setLoading(false);
       setError({ isError: true, buttonLabel: "Close" });
     }

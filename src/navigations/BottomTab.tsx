@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AntDesignIcons from "react-native-vector-icons/AntDesign";
 import RecentExpensesScreen from "../screens/RecentExpensesScreen";
 import HeaderIconButton from "../components/HeaderIconButton";
+import ProfileScreen from "../screens/ProfileScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -36,7 +37,7 @@ const BottomTab = () => {
             icon={"person"}
             color={tintColor as string}
             onPress={() => {
-              navigation.navigate("ProfileScreenStack");
+              navigation.navigate("ProfileScreen");
             }}
           />
         ),
@@ -63,6 +64,17 @@ const BottomTab = () => {
         }}
         name="AllExpensesScreen"
         component={AllExpensesScreen}
+      />
+      <Tab.Screen
+        options={{
+          tabBarLabel: "Profile",
+          title: "My Profile",
+          tabBarIcon: ({ color }) => (
+            <AntDesignIcons name="user" color={color} size={26} />
+          ),
+        }}
+        name="ProfileScreen"
+        component={ProfileScreen}
       />
     </Tab.Navigator>
   );

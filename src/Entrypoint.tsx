@@ -23,11 +23,6 @@ const Entrypoint = () => {
           component={BottomTab}
         />
         <RootStack.Screen
-          options={{ headerShown: false }}
-          name="ProfileScreenStack"
-          component={ProfileScreenStack}
-        />
-        <RootStack.Screen
           name="ManageExpenseScreen"
           component={ManageExpenseScreen as any}
           options={{

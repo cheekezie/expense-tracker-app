@@ -2,7 +2,7 @@ import { useLayoutEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import HeaderIconButton from "../components/HeaderIconButton";
 import Button from "../components/UI/Button";
-import { useAppDispatch } from "../store/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks/hooks";
 import { addExpense, editExpense, removeExpense } from "../store/redux/expense";
 import { ExpensesI } from "../types/expenses";
 import { ManageExpenseNavPropsI } from "../types/navigation";
@@ -12,6 +12,7 @@ import { createExpense, deleteExpense, updateExpense } from "../Services/api";
 import { ErrorDataI } from "../types/props";
 import ErrorOverlay from "../components/UI/Indicator/ErrorOverlay";
 import { FormStyles } from "../styles/FormStyles";
+import { getUserProfile } from "../store/redux/auth.redux";
 
 const ManageExpenseScreen = ({ navigation, route }: ManageExpenseNavPropsI) => {
   const [isLoading, setLoading] = useState(false);

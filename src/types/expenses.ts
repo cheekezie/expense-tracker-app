@@ -3,4 +3,5 @@ export interface ExpensesI {
   date: string;
   description: string;
   amount: string;
+  userId: string;
 }

@@ -17,6 +17,7 @@ export interface FormStateI {
 
 export interface AuthResponseI {
   idToken: string;
+  displayName: string;
   refreshToken: string;
   expiresIn: string;
   registered: boolean;
