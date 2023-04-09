@@ -18,6 +18,7 @@ import { AuthFormI, FormInitialI } from "../../types/auth";
 import { useNavigation } from "@react-navigation/native";
 import { TypographyStyles } from "../../styles/Typography";
 import { AuthMode } from "../../types/Enums/auth";
+import Lottie from "../UI/Lottie";
 
 const AuthForm = ({
   onSubmit,
@@ -107,6 +108,7 @@ const AuthForm = ({
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <View>
+        <Lottie path="../../../assets/lottie/auth.json" />
         <Text style={FormStyles.title}>{formTitle}</Text>
         <Input
           label="Email"

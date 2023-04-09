@@ -29,6 +29,9 @@ const Entrypoint = () => {
   };
 
   useEffect(() => {
+    // alternatively, move this a to a contect provider since it wraps the entire app content
+    // with this approach, protected screens will be by rendering conditionally instead of
+    // conditionally choosing initial route name
     const checkUser = async () => {
       try {
         const user = await local_get(StoreName.USER);
