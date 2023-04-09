@@ -1,10 +1,10 @@
 import { Text, View } from "react-native";
-import { GenericNavPropsI } from "../types/navigation";
-import ProfileItem from "../components/Profile/ProfileItem";
-import Button from "../components/UI/Button";
-import { FormStyles } from "../styles/FormStyles";
-import { useAppDispatch, useAppSelector } from "../store/hooks/hooks";
-import { clearAuth, getUserProfile } from "../store/redux/auth.redux";
+import { GenericNavPropsI } from "../../types/navigation";
+import ProfileItem from "../../components/Profile/ProfileItem";
+import Button from "../../components/UI/Button";
+import { FormStyles } from "../../styles/FormStyles";
+import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
+import { clearAuth, getUserProfile } from "../../store/redux/auth.redux";
 
 const ProfileScreen = ({ navigation }: GenericNavPropsI) => {
   const profile = useAppSelector(getUserProfile);

@@ -1,11 +1,13 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import theme from "../theme";
 import { Ionicons } from "@expo/vector-icons";
-import ProfileScreen from "../screens/ProfileScreen";
+import ProfileScreen from "../screens/Profile/ProfileScreen";
+import FavoritePlaces from "../screens/Places/FavoritePlaces";
+import ProfileScreenStack from "./ProfileScreenStack";
 
 const Drawer = createDrawerNavigator();
 
-const ProfileScreenStack = () => {
+const AccountScreenStack = () => {
   return (
     <Drawer.Navigator
       screenOptions={{
@@ -24,27 +26,27 @@ const ProfileScreenStack = () => {
       }}
     >
       <Drawer.Screen
-        name="ProfileScreen"
+        name="ProfileScreenStack"
         options={{
-          title: "Account",
+          title: "Profile",
           drawerIcon: ({ color, size }) => (
             <Ionicons name="person" size={size} color={color} />
           ),
         }}
-        component={ProfileScreen}
+        component={ProfileScreenStack}
       />
       <Drawer.Screen
         options={{
-          title: "Logout",
+          title: "Favorite Places",
           drawerIcon: ({ color, size }) => (
-            <Ionicons name="log-out" size={size} color={color} />
+            <Ionicons name="location-sharp" size={size} color={color} />
           ),
         }}
-        name="Logout"
-        component={ProfileScreen}
+        name="FavoritePlaces"
+        component={FavoritePlaces}
       />
     </Drawer.Navigator>
   );
 };
 
-export default ProfileScreenStack;
+export default AccountScreenStack;

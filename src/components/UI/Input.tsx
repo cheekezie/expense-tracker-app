@@ -42,7 +42,6 @@ const Input = ({
       {label && <Text style={[styles.inputLabel, labelStyle]}>{label}</Text>}
       <View>
         <TextInput
-          multiline
           style={[
             styles.textInputBase,
             inputThemeStyle,

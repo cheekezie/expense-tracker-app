@@ -1,12 +1,10 @@
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import AllExpensesScreen from "../screens/AllExpensesScreen";
-import ExpensesStack from "./ExpensesStack";
-import theme from "../theme";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import AntDesignIcons from "react-native-vector-icons/AntDesign";
-import RecentExpensesScreen from "../screens/RecentExpensesScreen";
 import HeaderIconButton from "../components/HeaderIconButton";
-import ProfileScreen from "../screens/ProfileScreen";
+import AllExpensesScreen from "../screens/AllExpensesScreen";
+import RecentExpensesScreen from "../screens/RecentExpensesScreen";
+import theme from "../theme";
+import AccountScreenStack from "./AccountScreenStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -16,6 +14,7 @@ const BottomTab = () => {
       screenOptions={({ navigation }) => ({
         tabBarActiveTintColor: theme.Colors.white,
         tabBarInactiveTintColor: theme.Colors.inactive,
+        headerShown: false,
         tabBarStyle: {
           backgroundColor: theme.Colors.lightPrimary,
         },
@@ -37,7 +36,11 @@ const BottomTab = () => {
             icon={"person"}
             color={tintColor as string}
             onPress={() => {
-              navigation.navigate("ProfileScreen");
+              // navigating to ProfileScreen will also work since its first screen in the nested stacks
+              navigation.navigate("AccountScreenStack", {
+                screen: "ProfileScreenStack",
+                params: { screen: "ProfileScreen" },
+              });
             }}
           />
         ),
@@ -47,6 +50,7 @@ const BottomTab = () => {
         options={{
           tabBarLabel: "Recent Expenses",
           title: "Recent Expenses",
+          headerShown: true,
           tabBarIcon: ({ color }) => (
             <AntDesignIcons name="hourglass" color={color} size={26} />
           ),
@@ -58,6 +62,7 @@ const BottomTab = () => {
         options={{
           tabBarLabel: "All Expenses",
           title: "All Expenses",
+          headerShown: true,
           tabBarIcon: ({ color }) => (
             <AntDesignIcons name="calendar" color={color} size={26} />
           ),
@@ -73,8 +78,10 @@ const BottomTab = () => {
             <AntDesignIcons name="user" color={color} size={26} />
           ),
         }}
-        name="ProfileScreen"
-        component={ProfileScreen}
+        // name="ProfileScreen"
+        // component={ProfileScreen}
+        name="AccountScreenStack"
+        component={AccountScreenStack}
       />
     </Tab.Navigator>
   );
