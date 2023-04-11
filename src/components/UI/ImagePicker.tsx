@@ -11,7 +11,11 @@ import Button from "./Button";
 import { DisplayStyles } from "../../styles/Display.style";
 import EmptyPickerState from "./EmptyPickerState";
 
-const ImagePicker = () => {
+const ImagePicker = ({
+  onImagePicked,
+}: {
+  onImagePicked: (data: string) => void;
+}) => {
   const [image, setImage] = useState("");
   const [cameraPermissonInformation, requestPermission] =
     useCameraPermissions();
@@ -45,7 +49,9 @@ const ImagePicker = () => {
     });
 
     if (!result.canceled) {
-      setImage(result.assets[0].uri);
+      const uri = result.assets[0].uri;
+      setImage(uri);
+      onImagePicked(uri);
     }
   };
   return (

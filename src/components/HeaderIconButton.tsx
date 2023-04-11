@@ -1,15 +1,16 @@
-import { Pressable, StyleSheet } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { DisplayStyles } from "../styles/Display.style";
 import { View } from "react-native";
 
 const HeaderIconButton = (props: {
   onPress?: VoidFunction;
-  icon: any;
+  icon?: any;
   color: string;
+  text?: string;
   closeNavigation?: boolean;
 }) => {
-  const { onPress, color, icon, closeNavigation } = props;
+  const { onPress, color, icon, text, closeNavigation } = props;
   // const navigation = useNavigation();
   // if (closeNavigation) {
   //   navigation.goBack();
@@ -21,7 +22,11 @@ const HeaderIconButton = (props: {
       style={({ pressed }) => [pressed ? DisplayStyles.clickFeedback : null]}
     >
       <View style={styles.buttonContaine}>
-        <Ionicons name={icon} size={24} color={color} />
+        {text ? (
+          <Text style={{ color }}>{text}</Text>
+        ) : (
+          <Ionicons name={icon} size={24} color={color} />
+        )}
       </View>
     </Pressable>
   );

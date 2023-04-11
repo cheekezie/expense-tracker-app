@@ -9,6 +9,7 @@ import FavoritePlaces from "../screens/Places/FavoritePlaces";
 import PlaceDetailsScreen from "../screens/Places/PlaceDetailsScreen";
 import AddPlaceScreen from "../screens/Places/AddPlaceScreen";
 import AllPlacesScreen from "../screens/Places/AllPlacesScreen";
+import MapScreen from "../screens/Places/MapScreen";
 
 const Stack = createNativeStackNavigator();
 const screenOptions = {
@@ -38,6 +39,7 @@ const PlacesScreenStack = () => {
           title: "Favorite Places",
         }}
       />
+
       <Stack.Group
         screenOptions={({ navigation }) => ({
           presentation: "modal",
@@ -52,7 +54,14 @@ const PlacesScreenStack = () => {
           ),
         })}
       >
-        <Stack.Screen name="AddPlaceScreen" component={AddPlaceScreen} />
+        <Stack.Screen
+          name="MapScreen"
+          component={MapScreen}
+          options={{
+            title: "My Location",
+          }}
+        />
+        <Stack.Screen name="AddPlaceScreen" component={AddPlaceScreen as any} />
         <Stack.Screen
           name="PlaceDetailsScreen"
           component={PlaceDetailsScreen}

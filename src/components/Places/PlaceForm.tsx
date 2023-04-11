@@ -20,7 +20,7 @@ import { useNavigation } from "@react-navigation/native";
 import { TypographyStyles } from "../../styles/Typography";
 import { AuthMode } from "../../types/Enums/auth";
 import Lottie from "../UI/Lottie";
-import { PlaceFormInitialI, PlacesI } from "../../types/places";
+import { LocationI, PlaceFormInitialI, PlacesI } from "../../types/places";
 import ImagePicker from "../UI/ImagePicker";
 import LocationPicker from "../UI/LocationPicker";
 
@@ -40,7 +40,7 @@ const PlaceForm = ({
       value: "",
       isValid: false,
     },
-    address: {
+    image: {
       value: "",
       isValid: false,
     },
@@ -62,7 +62,7 @@ const PlaceForm = ({
   const handleSubmit = () => {
     setSubmission(true);
     const emailIsValid = inputValue.title.value.trim() !== "";
-    const addressIsValid = inputValue.address.value.trim() !== "";
+    const addressIsValid = inputValue.image.value.trim() !== "";
     const locationIsValid = inputValue.location.value.trim() !== "";
 
     if (!emailIsValid || !addressIsValid || !locationIsValid) {
@@ -72,8 +72,8 @@ const PlaceForm = ({
             value: currentInputValue.title.value,
             isValid: emailIsValid,
           },
-          address: {
-            value: currentInputValue.address.value,
+          image: {
+            value: currentInputValue.image.value,
             isValid: addressIsValid,
           },
           location: {
@@ -86,10 +86,17 @@ const PlaceForm = ({
     }
     const dataToSubmit: Partial<PlacesI> = {
       title: inputValue.title.value,
-      address: inputValue.address.value,
+      address: inputValue.image.value,
       // location: inputValue.location.value,
     };
     onSubmit(dataToSubmit);
+  };
+
+  const imageHandler = (image: string) => {
+    console.log("image:", image);
+  };
+  const locationHandler = (locationData: LocationI) => {
+    console.log("location:", locationData);
   };
 
   return (
@@ -116,23 +123,9 @@ const PlaceForm = ({
             value: inputValue.title.value,
           }}
         ></Input>
-        {/* <Input
-          label="Address"
-          bordered={true}
-          coloreTheme="primary"
-          errorMessage={
-            !inputValue.address.isValid && submited ? "Enter an address)" : ""
-          }
-          inputOptions={{
-            inputMode: "text",
-            multiline: true,
-            onChangeText: inputCHangeHandler.bind(this, "address"),
-            value: inputValue.address.value,
-          }}
-        ></Input> */}
 
-        <ImagePicker />
-        <LocationPicker />
+        <ImagePicker onImagePicked={imageHandler} />
+        <LocationPicker onLocationPicked={locationHandler} />
 
         <View style={(DisplayStyles.flex, { marginBottom: 20 })}>
           <Button

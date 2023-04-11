@@ -4,9 +4,9 @@ import { ErrorDataI } from "../../types/props";
 import { View } from "react-native";
 import PlaceForm from "../../components/Places/PlaceForm";
 import { FormStyles } from "../../styles/FormStyles";
-import { GenericNavPropsI } from "../../types/navigation";
+import { AddPlaceNavPropsI, GenericNavPropsI } from "../../types/navigation";
 
-const AddPlaceScreen = ({ navigation }: GenericNavPropsI) => {
+const AddPlaceScreen = ({ navigation, route }: AddPlaceNavPropsI) => {
   const [isLoading, setLoading] = useState(false);
   const [isError, setError] = useState<ErrorDataI>({
     isError: false,

@@ -1,6 +1,7 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RouteProp } from "@react-navigation/native";
 import { ExpensesI } from "./expenses";
+import { LocationI } from "./places";
 
 // Interface for rootstack. Undefined if no value is passed, pass objects if param values are required
 export type RootStackParamList = {
@@ -8,7 +9,8 @@ export type RootStackParamList = {
   SignInScreen: undefined;
   SignUpScreen: undefined;
   AuthenticationStack: any;
-  AddPlaceScreen: any;
+  AddPlaceScreen: LocationI;
+  MapScreen: any;
   ManageExpenseScreen: {
     data?: ExpensesI;
   };
@@ -38,6 +40,13 @@ export interface ManageExpenseNavPropsI {
     "ManageExpenseScreen"
   >;
   route: RouteProp<RootStackParamList, "ManageExpenseScreen">;
+}
+export interface AddPlaceNavPropsI {
+  navigation: NativeStackNavigationProp<RootStackParamList, "AddPlaceScreen">;
+  route: RouteProp<RootStackParamList, "AddPlaceScreen">;
+}
+export interface LocationPickerRoutePropsI {
+  route: RouteProp<RootStackParamList, "AddPlaceScreen">;
 }
 declare global {
   namespace ReactNavigation {

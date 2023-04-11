@@ -1,20 +1,45 @@
-import { Alert, Image, StyleSheet, Text, View } from "react-native";
-import Button from "./Button";
-import { DisplayStyles } from "../../styles/Display.style";
-import EmptyPickerState from "./EmptyPickerState";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import {
-  getCurrentPositionAsync,
   PermissionStatus,
+  getCurrentPositionAsync,
   useForegroundPermissions,
 } from "expo-location";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Alert, Image, StyleSheet, View } from "react-native";
 import { getMapPreview } from "../../Helpers/util";
+import { DisplayStyles } from "../../styles/Display.style";
+import Button from "./Button";
+import EmptyPickerState from "./EmptyPickerState";
 
-const LocationPicker = () => {
+const LocationPicker = ({
+  onLocationPicked,
+}: {
+  onLocationPicked: (data: any) => void;
+}) => {
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(false);
   const [locationPermissonInformation, requestPermission] =
     useForegroundPermissions();
+
+  const navigation = useNavigation();
+  const route = useRoute();
+  const params = route.params as { longitude: number; latitude: number };
+
+  const mapPickedLocation = route.params && {
+    longitude: params.longitude,
+    latitude: params.latitude,
+  };
+
+  useEffect(() => {
+    if (mapPickedLocation) {
+      const imageUri = getMapPreview(
+        mapPickedLocation.latitude,
+        mapPickedLocation.longitude
+      );
+      setImage(imageUri);
+      onLocationPicked(mapPickedLocation);
+    }
+  }, [route, params]);
 
   const verifyPermissions = async () => {
     if (
@@ -45,10 +70,13 @@ const LocationPicker = () => {
       location.coords.longitude
     );
     setImage(imageUri);
+    onLocationPicked(mapPickedLocation);
     setLoading(false);
   };
 
-  const mapHandler = async () => {};
+  const mapHandler = async () => {
+    navigation.navigate("MapScreen");
+  };
 
   return (
     <View style={DisplayStyles.emptyPreviewContainer}>
