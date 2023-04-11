@@ -11,6 +11,7 @@ export interface PlaceFormInitialI {
   location: FormStateI;
   title: FormStateI;
   image: FormStateI;
+  address?: string;
 }
 export interface LocationI {
   longitude: number;

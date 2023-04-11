@@ -7,6 +7,8 @@ import {
   SinUpResponse,
 } from "../types/auth";
 import { ExpensesI } from "../types/expenses";
+import { LocationI } from "../types/places";
+import { mapKey } from "../Helpers/util";
 
 const firebaseKey = "AIzaSyB_GkFzLfYeck0YXgxWHmTlvUaJJPl2Xnw";
 const baseUrl = "https://my-expense-tracker-react-default-rtdb.firebaseio.com/";
@@ -44,6 +46,12 @@ export const updateExpense = async (
 };
 export const deleteExpense = (id: string) => {
   return axios.delete(baseUrl + `expenses${id}.json`);
+};
+
+export const getLocationAddress = ({ latitude, longitude }: LocationI) => {
+  return axios.delete(
+    `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${mapKey()}`
+  );
 };
 
 export const getExpenses = async () => {
