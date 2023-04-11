@@ -1,17 +1,14 @@
-import { Alert, View } from "react-native";
-import AuthForm from "../components/Auth/AuthForm";
-import { FormStyles } from "../styles/FormStyles";
 import { useState } from "react";
-import { ErrorDataI } from "../types/props";
-import { useAppDispatch } from "../store/hooks/hooks";
-import { AuthFormI } from "../types/auth";
-import ErrorOverlay from "../components/UI/Indicator/ErrorOverlay";
+import { Alert, View } from "react-native";
 import { createUser } from "../Services/api";
-import { AuthMode } from "../types/Enums/auth";
+import AuthForm from "../components/Auth/AuthForm";
+import { useAppDispatch } from "../store/hooks/hooks";
 import { setUser } from "../store/redux/auth.redux";
+import { FormStyles } from "../styles/FormStyles";
+import { AuthMode } from "../types/Enums/auth";
+import { AuthFormI } from "../types/auth";
 import { GenericNavPropsI } from "../types/navigation";
-import { local_save } from "../store/local/asyncstore";
-import { StoreName } from "../types/Enums/store.ENUMS";
+import { ErrorDataI } from "../types/props";
 
 const SignUpScreen = ({ navigation }: GenericNavPropsI) => {
   const [isLoading, setLoading] = useState(false);

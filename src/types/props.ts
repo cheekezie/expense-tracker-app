@@ -15,9 +15,11 @@ import { ExpensesI } from "./expenses";
 export interface CustomButtonPropsI {
   buttonStyle?: StyleProp<ViewStyle>;
   mode?: "flat";
+  icon?: any;
   onPress?: (event: GestureResponderEvent) => void;
   children: ReactNode;
   disabled?: boolean;
+  bordered?: boolean;
 }
 
 export interface MealdetailsPropI {

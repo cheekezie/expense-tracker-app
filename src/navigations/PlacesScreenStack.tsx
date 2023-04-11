@@ -4,9 +4,11 @@ import AddExpenseScreen from "../screens/AddExpenseScreen";
 import EditExpenseScreen from "../screens/EditExpenseScreen";
 import RecentExpensesScreen from "../screens/RecentExpensesScreen";
 import theme from "../theme";
-import AddFavoritePlace from "../screens/Places/AddFavoritePlace";
+import AddFavoritePlace from "../screens/Places/AddPlaceScreen";
 import FavoritePlaces from "../screens/Places/FavoritePlaces";
 import PlaceDetailsScreen from "../screens/Places/PlaceDetailsScreen";
+import AddPlaceScreen from "../screens/Places/AddPlaceScreen";
+import AllPlacesScreen from "../screens/Places/AllPlacesScreen";
 
 const Stack = createNativeStackNavigator();
 const screenOptions = {
@@ -16,12 +18,19 @@ const screenOptions = {
   headerTintColor: "white",
   // headerShown: false,
   contentStyle: {
-    backgroundColor: theme.Colors.primary,
+    // backgroundColor: theme.Colors.primary,
   },
 };
 const PlacesScreenStack = () => {
   return (
     <Stack.Navigator screenOptions={screenOptions}>
+      <Stack.Screen
+        name="AllPlacesScreen"
+        component={AllPlacesScreen}
+        options={{
+          title: "Visited Places",
+        }}
+      />
       <Stack.Screen
         name="FavoritePlaces"
         component={FavoritePlaces}
@@ -30,18 +39,20 @@ const PlacesScreenStack = () => {
         }}
       />
       <Stack.Group
-        screenOptions={{
+        screenOptions={({ navigation }) => ({
           presentation: "modal",
           headerLeft: ({ tintColor }) => (
             <HeaderIconButton
               icon={"close"}
               color={tintColor as string}
-              closeNavigation={true}
+              onPress={() => {
+                navigation.goBack();
+              }}
             />
           ),
-        }}
+        })}
       >
-        <Stack.Screen name="AddFavoritePlace" component={AddFavoritePlace} />
+        <Stack.Screen name="AddPlaceScreen" component={AddPlaceScreen} />
         <Stack.Screen
           name="PlaceDetailsScreen"
           component={PlaceDetailsScreen}

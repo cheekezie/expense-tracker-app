@@ -1,4 +1,4 @@
-import AddFavoritePlace from "./AddFavoritePlace";
+import AddFavoritePlace from "./AddPlaceScreen";
 import FavoritePlaces from "./FavoritePlaces";
 import MapScreen from "./MapScreen";
 

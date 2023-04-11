@@ -35,7 +35,7 @@ const AccountScreenStack = () => {
         }}
         component={ProfileScreenStack}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         options={{
           title: "Favorite Places",
           drawerIcon: ({ color, size }) => (
@@ -44,7 +44,7 @@ const AccountScreenStack = () => {
         }}
         name="FavoritePlaces"
         component={FavoritePlaces}
-      />
+      /> */}
     </Drawer.Navigator>
   );
 };

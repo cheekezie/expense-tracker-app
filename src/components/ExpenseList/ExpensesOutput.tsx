@@ -7,6 +7,7 @@ import Button from "../UI/Button";
 import { useNavigation } from "@react-navigation/native";
 import Loading from "../UI/Indicator/Loading";
 import ErrorOverlay from "../UI/Indicator/ErrorOverlay";
+import { DisplayStyles } from "../../styles/Display.style";
 
 const EmptyState = () => {
   const navigation = useNavigation<any>();
@@ -16,8 +17,10 @@ const EmptyState = () => {
   };
 
   return (
-    <View style={styles.emptyContainer}>
-      <Text style={styles.emptyText}>You don't have any Expenses yet</Text>
+    <View style={DisplayStyles.emptyContainer}>
+      <Text style={DisplayStyles.emptyText}>
+        You don't have any Expenses yet
+      </Text>
       <Button
         buttonStyle={{ width: 150, alignSelf: "center" }}
         onPress={addExpense}
@@ -66,16 +69,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingBottom: 0,
     flex: 1,
-  },
-  emptyContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  emptyText: {
-    color: theme.Colors.primary,
-    fontWeight: "bold",
-    fontSize: 18,
-    marginBottom: 20,
   },
 });

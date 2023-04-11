@@ -7,10 +7,8 @@ import { setUser } from "../store/redux/auth.redux";
 import { FormStyles } from "../styles/FormStyles";
 import { AuthMode } from "../types/Enums/auth";
 import { AuthFormI } from "../types/auth";
-import { ErrorDataI } from "../types/props";
 import { GenericNavPropsI } from "../types/navigation";
-import { local_save } from "../store/local/asyncstore";
-import { StoreName } from "../types/Enums/store.ENUMS";
+import { ErrorDataI } from "../types/props";
 
 const SignInScreen = ({ navigation }: GenericNavPropsI) => {
   const [isLoading, setLoading] = useState(false);

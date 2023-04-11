@@ -1,18 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  AddExpensesActionI,
-  AuthState,
-  EditExpensesActionI,
-  ExpenseState,
-  RemoveExpensesActionI,
-  SetExpensesActionI,
-  StoreUserI,
-} from "../../types/redux";
-import { RootState } from "./store";
+import { StoreName } from "../../types/Enums/store.enums";
 import { AuthResponseI } from "../../types/auth";
-import { local_get, local_remove, local_save } from "../local/asyncstore";
-import { StoreName } from "../../types/Enums/store.ENUMS";
-import { setAppLoading } from "./app.redux";
+import { AuthState, StoreUserI } from "../../types/redux";
+import { local_remove, local_save } from "../local/asyncstore";
+import { RootState } from "./store";
 
 // Define the initial state using that type
 const initialState: AuthState = {

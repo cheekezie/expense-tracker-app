@@ -5,6 +5,8 @@ import AllExpensesScreen from "../screens/AllExpensesScreen";
 import RecentExpensesScreen from "../screens/RecentExpensesScreen";
 import theme from "../theme";
 import AccountScreenStack from "./AccountScreenStack";
+import PlacesScreenStack from "./PlacesScreenStack";
+import { Ionicons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 
@@ -69,6 +71,17 @@ const BottomTab = () => {
         }}
         name="AllExpensesScreen"
         component={AllExpensesScreen}
+      />
+      <Tab.Screen
+        options={{
+          tabBarLabel: "Trips",
+          title: "My Trips",
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="location-sharp" size={26} color={color} />
+          ),
+        }}
+        name="PlacesScreenStack"
+        component={PlacesScreenStack}
       />
       <Tab.Screen
         options={{

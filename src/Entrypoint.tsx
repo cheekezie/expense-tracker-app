@@ -14,7 +14,7 @@ import {
   setUser,
 } from "./store/redux/auth.redux";
 import theme from "./theme";
-import { StoreName } from "./types/Enums/store.ENUMS";
+import { StoreName } from "./types/Enums/store.enums";
 import { getAppLoadingState, setAppLoading } from "./store/redux/app.redux";
 
 const Entrypoint = () => {

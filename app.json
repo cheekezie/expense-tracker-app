@@ -14,6 +14,26 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "plugin": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow Trackly to access your camera."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow Trackly to accesses your photos."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow Trackly to use your location."
+        }
+      ]
+    ],
     "ios": {
       "supportsTablet": true
     },

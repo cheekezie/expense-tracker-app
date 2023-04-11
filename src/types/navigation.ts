@@ -7,7 +7,8 @@ export type RootStackParamList = {
   BottomTab: undefined;
   SignInScreen: undefined;
   SignUpScreen: undefined;
-  AuthenticationStack: undefined;
+  AuthenticationStack: any;
+  AddPlaceScreen: any;
   ManageExpenseScreen: {
     data?: ExpensesI;
   };

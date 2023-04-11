@@ -4,7 +4,7 @@ import AddExpenseScreen from "../screens/AddExpenseScreen";
 import EditExpenseScreen from "../screens/EditExpenseScreen";
 import RecentExpensesScreen from "../screens/RecentExpensesScreen";
 import theme from "../theme";
-import AddFavoritePlace from "../screens/Places/AddFavoritePlace";
+import AddFavoritePlace from "../screens/Places/AddPlaceScreen";
 import FavoritePlaces from "../screens/Places/FavoritePlaces";
 import PlaceDetailsScreen from "../screens/Places/PlaceDetailsScreen";
 import ProfileScreen from "../screens/Profile/ProfileScreen";

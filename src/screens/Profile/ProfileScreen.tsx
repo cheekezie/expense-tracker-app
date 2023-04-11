@@ -11,7 +11,9 @@ const ProfileScreen = ({ navigation }: GenericNavPropsI) => {
   const dispatch = useAppDispatch();
   const handleLogout = () => {
     dispatch(clearAuth());
-    navigation.navigate("SignInScreen");
+    navigation.navigate("AuthenticationStack", {
+      screen: "SignInScreen",
+    });
   };
 
   return (

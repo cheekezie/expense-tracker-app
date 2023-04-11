@@ -35,6 +35,8 @@ export const ButtonStyles = StyleSheet.create({
     minHeight: 45,
     justifyContent: "center",
     backgroundColor: theme.Colors.primary,
+    flexDirection: "row",
+    alignItems: "center",
   },
   flat: {
     backgroundColor: "transparent",
