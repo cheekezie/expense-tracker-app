@@ -1,5 +1,6 @@
 import { AuthResponseI } from "./auth";
 import { ExpensesI } from "./expenses";
+import { PlacesI } from "./places";
 
 // Define a type for the slice state
 export interface ExpenseState {
@@ -47,4 +48,20 @@ export interface StoreUserI {
 export interface SetAppStateI {
   type: string;
   payload: boolean;
+}
+
+export interface PlacesState {
+  places: PlacesI[];
+}
+
+export interface StorePlaceI {
+  type: string;
+  payload: PlacesI;
+}
+export interface EditPlacesActionI {
+  type: string;
+  payload: {
+    id: string;
+    data: Partial<PlacesI>;
+  };
 }

@@ -11,7 +11,7 @@ export interface FormInitialI {
 }
 
 export interface FormStateI {
-  value: string;
+  value: any;
   isValid: boolean;
 }
 

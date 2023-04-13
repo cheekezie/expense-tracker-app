@@ -48,10 +48,14 @@ export const deleteExpense = (id: string) => {
   return axios.delete(baseUrl + `expenses${id}.json`);
 };
 
-export const getLocationAddress = ({ latitude, longitude }: LocationI) => {
-  return axios.delete(
+export const getLocationAddress = async ({
+  latitude,
+  longitude,
+}: LocationI) => {
+  const response = await axios.get(
     `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${mapKey()}`
   );
+  return response.data;
 };
 
 export const getExpenses = async () => {

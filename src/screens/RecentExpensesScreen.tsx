@@ -13,6 +13,8 @@ import { ExpensesI } from "../types/expenses";
 import Loading from "../components/UI/Indicator/Loading";
 import { ErrorDataI } from "../types/props";
 import { getUserProfile } from "../store/redux/auth.redux";
+import { ScrollView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const RecentExpensesScreen = () => {
   const [isLoading, setLoading] = useState(true);

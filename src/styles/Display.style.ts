@@ -68,4 +68,8 @@ export const DisplayStyles = StyleSheet.create({
   emptyPreviewStateText: {
     color: theme.Colors.dark,
   },
+  borderDanger: {
+    borderColor: theme.Colors.red,
+    borderWidth: 1,
+  },
 });

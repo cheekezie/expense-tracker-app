@@ -10,11 +10,15 @@ import { getMapPreview } from "../../Helpers/util";
 import { DisplayStyles } from "../../styles/Display.style";
 import Button from "./Button";
 import EmptyPickerState from "./EmptyPickerState";
+import { LocationI, MapAddressDataI } from "../../types/places";
+import { getLocationAddress } from "../../Services/api";
 
 const LocationPicker = ({
   onLocationPicked,
+  isError,
 }: {
   onLocationPicked: (data: any) => void;
+  isError?: boolean;
 }) => {
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -31,14 +35,25 @@ const LocationPicker = ({
   };
 
   useEffect(() => {
-    if (mapPickedLocation) {
-      const imageUri = getMapPreview(
-        mapPickedLocation.latitude,
-        mapPickedLocation.longitude
-      );
-      setImage(imageUri);
-      onLocationPicked(mapPickedLocation);
-    }
+    const handleAddress = async () => {
+      if (mapPickedLocation) {
+        const imageUri = getMapPreview(
+          mapPickedLocation.latitude,
+          mapPickedLocation.longitude
+        );
+        setImage(imageUri);
+        try {
+          const res: MapAddressDataI = await getLocationAddress(
+            mapPickedLocation
+          );
+          const address = res.results[0].formatted_address;
+          onLocationPicked({ ...mapPickedLocation, address });
+        } catch (error) {
+          // setLoading(false);
+        }
+      }
+    };
+    handleAddress();
   }, [route, params]);
 
   const verifyPermissions = async () => {
@@ -70,7 +85,13 @@ const LocationPicker = ({
       location.coords.longitude
     );
     setImage(imageUri);
-    onLocationPicked(mapPickedLocation);
+    const loc = {
+      latitude: location.coords.latitude,
+      longitude: location.coords.longitude,
+    };
+    const res: MapAddressDataI = await getLocationAddress(loc);
+    const address = res.results[0].formatted_address;
+    onLocationPicked({ ...loc, address });
     setLoading(false);
   };
 
@@ -82,6 +103,7 @@ const LocationPicker = ({
     <View style={DisplayStyles.emptyPreviewContainer}>
       {!image && (
         <EmptyPickerState
+          isError={isError}
           message={
             loading ? "Retrieving location..." : "No location picked yet"
           }

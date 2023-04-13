@@ -25,3 +25,7 @@ export const getMapPreview = (lat: number, lng: number): string => {
   const imagePreviewUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=14&size=400x200&maptype=roadmap&markers=color:blue%7Clabel:S%7C${lat},${lng}&key=${mapKey()}`;
   return imagePreviewUrl;
 };
+
+export const uid = () => {
+  return Date.now().toString() + Math.round(Math.random()).toString();
+};

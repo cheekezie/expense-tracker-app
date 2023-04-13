@@ -1,4 +1,4 @@
-import { FlatList, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import { PlacesI } from "../../types/places";
 import PlaceItem from "./PlaceItem";
 import { useNavigation } from "@react-navigation/native";
@@ -33,6 +33,7 @@ const PlacesList = ({ places }: { places: PlacesI[] }) => {
   }
   return (
     <FlatList
+      style={styles.list}
       showsVerticalScrollIndicator={false}
       data={places}
       keyExtractor={(item) => item.id}
@@ -41,3 +42,9 @@ const PlacesList = ({ places }: { places: PlacesI[] }) => {
   );
 };
 export default PlacesList;
+
+const styles = StyleSheet.create({
+  list: {
+    margin: 24,
+  },
+});

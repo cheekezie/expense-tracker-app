@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "expense-tracker-app",
-    "slug": "expense-tracker-app",
+    "slug": "trackly",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -41,10 +41,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.cheekezie.trackly"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c4b2ab86-bc1c-4248-851a-a91b53f67eb8"
+      }
+    },
+    "owner": "cheekezie"
   }
 }

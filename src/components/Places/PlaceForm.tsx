@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+  Alert,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -45,13 +46,13 @@ const PlaceForm = ({
       isValid: false,
     },
     location: {
-      value: "",
+      value: {},
       isValid: false,
     },
   });
   const [submited, setSubmission] = useState(false);
 
-  const inputCHangeHandler = (inputField: string, value: string) => {
+  const inputChangeHandler = (inputField: string, value: any) => {
     setInputValue((currentInputValues) => {
       return {
         ...currentInputValues,
@@ -61,20 +62,21 @@ const PlaceForm = ({
   };
   const handleSubmit = () => {
     setSubmission(true);
-    const emailIsValid = inputValue.title.value.trim() !== "";
-    const addressIsValid = inputValue.image.value.trim() !== "";
-    const locationIsValid = inputValue.location.value.trim() !== "";
+    const titleIsValid = inputValue.title.value.trim() !== "";
+    const imageIsValid = inputValue.image.value !== "";
+    const locationIsValid = Object.keys(inputValue.location.value).length > 0;
+    console.log(inputValue.location.value);
 
-    if (!emailIsValid || !addressIsValid || !locationIsValid) {
+    if (!titleIsValid || !imageIsValid || !locationIsValid) {
       setInputValue((currentInputValue) => {
         return {
           title: {
             value: currentInputValue.title.value,
-            isValid: emailIsValid,
+            isValid: titleIsValid,
           },
           image: {
             value: currentInputValue.image.value,
-            isValid: addressIsValid,
+            isValid: imageIsValid,
           },
           location: {
             value: currentInputValue.location.value,
@@ -82,21 +84,27 @@ const PlaceForm = ({
           },
         };
       });
+      if (!imageIsValid || !locationIsValid) {
+        Alert.alert(
+          "Missing fields",
+          "pls select an image and a location to proceed"
+        );
+      }
       return;
     }
     const dataToSubmit: Partial<PlacesI> = {
       title: inputValue.title.value,
-      address: inputValue.image.value,
-      // location: inputValue.location.value,
+      imageUri: inputValue.image.value,
+      location: inputValue.location.value,
     };
     onSubmit(dataToSubmit);
   };
 
   const imageHandler = (image: string) => {
-    console.log("image:", image);
+    inputChangeHandler("image", image);
   };
   const locationHandler = (locationData: LocationI) => {
-    console.log("location:", locationData);
+    inputChangeHandler("location", locationData);
   };
 
   return (
@@ -119,13 +127,19 @@ const PlaceForm = ({
           inputOptions={{
             inputMode: "text",
             placeholder: "",
-            onChangeText: inputCHangeHandler.bind(this, "title"),
+            onChangeText: inputChangeHandler.bind(this, "title"),
             value: inputValue.title.value,
           }}
         ></Input>
 
-        <ImagePicker onImagePicked={imageHandler} />
-        <LocationPicker onLocationPicked={locationHandler} />
+        <ImagePicker
+          onImagePicked={imageHandler}
+          isError={!inputValue.image.isValid && submited}
+        />
+        <LocationPicker
+          onLocationPicked={locationHandler}
+          isError={!inputValue.location.isValid && submited}
+        />
 
         <View style={(DisplayStyles.flex, { marginBottom: 20 })}>
           <Button

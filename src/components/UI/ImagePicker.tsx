@@ -13,8 +13,10 @@ import EmptyPickerState from "./EmptyPickerState";
 
 const ImagePicker = ({
   onImagePicked,
+  isError,
 }: {
   onImagePicked: (data: string) => void;
+  isError?: boolean;
 }) => {
   const [image, setImage] = useState("");
   const [cameraPermissonInformation, requestPermission] =
@@ -56,7 +58,9 @@ const ImagePicker = ({
   };
   return (
     <View style={DisplayStyles.emptyPreviewContainer}>
-      {!image && <EmptyPickerState message="No Image picked yet" />}
+      {!image && (
+        <EmptyPickerState isError={isError} message="No Image picked yet" />
+      )}
       <Button
         onPress={pickImage}
         mode="flat"

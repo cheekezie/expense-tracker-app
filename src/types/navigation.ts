@@ -9,7 +9,7 @@ export type RootStackParamList = {
   SignInScreen: undefined;
   SignUpScreen: undefined;
   AuthenticationStack: any;
-  AddPlaceScreen: LocationI;
+  AddPlaceScreen: any;
   MapScreen: any;
   ManageExpenseScreen: {
     data?: ExpensesI;
